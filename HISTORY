@@ -1,6 +1,11 @@
 VDR Plugin 'clock' Revision History
 ----------------------------------
 
+2019-10-28: Version 1.0.1
+- source code transferred to Github, original source is down
+- Converted to gettext
+- New makefile vor vdr-2.4
+
 2008-03-07: Version 1.0.0 (thanks to Marc)
 - Corrected a bug when the plugin is called twice from a keymacro
 
