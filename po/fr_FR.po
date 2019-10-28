@@ -1,0 +1,125 @@
+# VDR plugin language source file.
+# Copyright (C) 2007 Klaus Schmidinger <kls@tvdr.de>
+# This file is distributed under the same license as the VDR package.
+# Jean-Claude Repetto <jc@repetto.org>, 2001
+# Olivier Jacques <jacquesolivier@hotmail.com>, 2003
+# Gregoire Favre <greg@magma.unil.ch>, 2003
+# Nicolas Huillard <nhuillard@e-dition.fr>, 2005
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: VDR 1.7.27\n"
+"Report-Msgid-Bugs-To: <dev@erichseifert.de>\n"
+"POT-Creation-Date: 2012-10-30 13:00+0200\n"
+"PO-Revision-Date: 2012-10-30 13:00+0200\n"
+"Last-Translator: Nicolas Huillard <nhuillard@e-dition.fr>\n"
+"Language-Team: <vdr@linuxtv.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "A Simple Clock"
+msgstr ""
+
+msgid "Clock"
+msgstr "Heure"
+
+msgid "Transparent"
+msgstr "Transparent"
+
+msgid "White"
+msgstr "Blanc"
+
+msgid "Black"
+msgstr "Noir"
+
+msgid "Red"
+msgstr "Rouge"
+
+msgid "Green"
+msgstr "Vert"
+
+msgid "Yellow"
+msgstr "Jaune"
+
+msgid "Blue"
+msgstr "Bleu"
+
+msgid "Digital"
+msgstr "Digital"
+
+msgid "Analog"
+msgstr "Analogique"
+
+msgid "Analog modern"
+msgstr ""
+
+msgid "MorphOS"
+msgstr ""
+
+msgid "TuxClock"
+msgstr ""
+
+msgid "Internet time"
+msgstr "Temps internet"
+
+msgid "Tea clock"
+msgstr "Pause cafe"
+
+msgid "It's tea time"
+msgstr "c'est l'heure de la pause cafe"
+
+msgid "x Position"
+msgstr "x Position"
+
+msgid "y Position"
+msgstr "y Position"
+
+msgid "Type of the clock"
+msgstr "Format d'affichage"
+
+msgid "Background color"
+msgstr "Couleur de fond"
+
+msgid "Foreground color"
+msgstr "Couleur premier plan"
+
+msgid "Show Seconds"
+msgstr "Afficher secondes"
+
+msgid "FullScreen"
+msgstr "FullScreen"
+
+msgid "Analog clock size"
+msgstr "Taille de l'horloge analogique"
+
+msgid "Arrow color"
+msgstr "Couleur aiguilles"
+
+msgid "Length of hour arrow [%]"
+msgstr "Longueur aiguille Hr [%]"
+
+msgid "Width of hour arrow [%]"
+msgstr "Largeur des aiguilles Hr [%]"
+
+msgid "Length of min arrow [%]"
+msgstr "Longueur aiguille Min [%]"
+
+msgid "Width of min arrow [%]"
+msgstr "Largeur des aiguilles Min [%]"
+
+msgid "Seconds arrow color"
+msgstr "Couleur aiguille Sec"
+
+msgid "Length of sec arrow [%]"
+msgstr "Longueur aiguille Sec [%]"
+
+msgid "Width of sec arrow [%]"
+msgstr "Largeur des aiguilles Sec [%]"
+
+msgid "Time till tea"
+msgstr "Temps restant jusqu'au cafe"
+
+msgid "Show Countdown"
+msgstr "Afficher le compte a rebours"

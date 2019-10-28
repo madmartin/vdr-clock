@@ -24,17 +24,17 @@
 #include <vdr/plugin.h>
 #include <vdr/font.h>
 #include <vdr/remote.h>
+#include <vdr/i18n.h>
 #include <math.h>
 #include "enhancedbitmap.h"
-#include "i18n.h"
 
 #include "images/clock.xpm"
 #include "images/tux.xpm"
 #include "images/tuxpart.xpm"
 
 static const char *VERSION        = "1.0.0";
-static const char *DESCRIPTION    = "A Simple Clock";
-static const char *MAINMENUENTRY  = "Clock";
+static const char *DESCRIPTION    = trNOOP("A Simple Clock");
+static const char *MAINMENUENTRY  = trNOOP("Clock");
 
 // Global variables
 
@@ -67,22 +67,22 @@ int       ColorHour  = 1;
 int       ColorMin   = 1;
 int       ColorSec   = 3;
 int       TeaTime    = 5;
-const char      *TimeColors[]  = {"Transparent",
-                            "White",
-	                    "Black",
-			    "Red",
-			    "Green",
-			    "Yellow",
-			    "Blue",
-                           };
-const char      *ClockType[] = {"Digital",
-			  "Analog",
-			  "Analog modern",
-			  "MorphOS",
-			  "TuxClock",
-			  "Internet time",
-			  "Tea clock",
-                         };
+const char      *TimeColors[] = {trNOOP("Transparent"),
+			trNOOP("White"),
+			trNOOP("Black"),
+			trNOOP("Red"),
+			trNOOP("Green"),
+			trNOOP("Yellow"),
+			trNOOP("Blue"),
+		};
+const char      *ClockType[] = {trNOOP("Digital"),
+			trNOOP("Analog"),
+			trNOOP("Analog modern"),
+			trNOOP("MorphOS"),
+			trNOOP("TuxClock"),
+			trNOOP("Internet time"),
+			trNOOP("Tea clock"),
+		};
 
 
 
@@ -590,13 +590,13 @@ public:
   cPluginClock(void);
   virtual ~cPluginClock();
   virtual const char *Version(void) { return VERSION; }
-  virtual const char *Description(void) { return DESCRIPTION; }
+  virtual const char *Description(void) { return tr(DESCRIPTION); }
   virtual const char *CommandLineHelp(void);
   virtual bool ProcessArgs(int argc, char *argv[]);
   virtual bool Initialize(void);
   virtual bool Start(void);
   virtual void Housekeeping(void);
-  virtual const char *MainMenuEntry(void) { return MAINMENUENTRY; }
+  virtual const char *MainMenuEntry(void) { return tr(MAINMENUENTRY); }
   virtual cOsdObject *MainMenuAction(void);
   virtual cMenuSetupPage *SetupMenu(void);
   virtual bool SetupParse(const char *Name, const char *Value);
@@ -635,7 +635,6 @@ bool cPluginClock::Initialize(void)
 bool cPluginClock::Start(void)
 {
   // Start any background activities the plugin shall perform.
-  RegisterI18n(Phrases);
   return true;
 }
 

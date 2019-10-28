@@ -1,0 +1,123 @@
+# VDR plugin language source file.
+# Copyright (C) 2007 Klaus Schmidinger <kls@tvdr.de>
+# This file is distributed under the same license as the VDR package.
+# Klaus Schmidinger <kls@tvdr.de>, 2000
+# Erich Seifert <dev@erichseifert.de>, 2012
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: VDR 1.7.27\n"
+"Report-Msgid-Bugs-To: <dev@erichseifert.de>\n"
+"POT-Creation-Date: 2012-10-30 13:00+0200\n"
+"PO-Revision-Date: 2012-10-30 13:35+0200\n"
+"Last-Translator: Erich Seifert <dev@erichseifert.de>\n"
+"Language-Team: <vdr@linuxtv.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "A Simple Clock"
+msgstr "Eine einfache Uhr"
+
+msgid "Clock"
+msgstr "Uhr"
+
+msgid "Transparent"
+msgstr "Transparent"
+
+msgid "White"
+msgstr "Weiß"
+
+msgid "Black"
+msgstr "Schwarz"
+
+msgid "Red"
+msgstr "Rot"
+
+msgid "Green"
+msgstr "Grün"
+
+msgid "Yellow"
+msgstr "Gelb"
+
+msgid "Blue"
+msgstr "Blau"
+
+msgid "Digital"
+msgstr "Digital"
+
+msgid "Analog"
+msgstr "Analog"
+
+msgid "Analog modern"
+msgstr ""
+
+msgid "MorphOS"
+msgstr ""
+
+msgid "TuxClock"
+msgstr ""
+
+msgid "Internet time"
+msgstr "Internet-Zeit"
+
+msgid "Tea clock"
+msgstr "Teekocher"
+
+msgid "It's tea time"
+msgstr "Es ist Teezeit!"
+
+msgid "x Position"
+msgstr "x-Position"
+
+msgid "y Position"
+msgstr "y-Position"
+
+msgid "Type of the clock"
+msgstr "Art der Uhr"
+
+msgid "Background color"
+msgstr "Hintergrundfarbe"
+
+msgid "Foreground color"
+msgstr "Vordergrundfarbe"
+
+msgid "Show Seconds"
+msgstr "Sekunden anzeigen"
+
+msgid "FullScreen"
+msgstr "FullScreen"
+
+msgid "Analog clock size"
+msgstr "Größe der analogen Uhr"
+
+msgid "Arrow color"
+msgstr "Zeigerfarbe"
+
+msgid "Length of hour arrow [%]"
+msgstr "Länge des Stundenzeigers [%]"
+
+msgid "Width of hour arrow [%]"
+msgstr "Breite des Stundenzeigers [%]"
+
+msgid "Length of min arrow [%]"
+msgstr "Länge des Minutenzeigers [%]"
+
+msgid "Width of min arrow [%]"
+msgstr "Breite des Minutenzeigers [%]"
+
+msgid "Seconds arrow color"
+msgstr "Farbe des Sekundenzeigers"
+
+msgid "Length of sec arrow [%]"
+msgstr "Länge des Sekundenzeigers [%]"
+
+msgid "Width of sec arrow [%]"
+msgstr "Breite des Sekundenzeigers [%]"
+
+msgid "Time till tea"
+msgstr "Zeit bis der Tee fertig ist"
+
+msgid "Show Countdown"
+msgstr "Countdown anzeigen"

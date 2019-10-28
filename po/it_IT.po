@@ -1,0 +1,124 @@
+# VDR plugin language source file.
+# Copyright (C) 2007 Klaus Schmidinger <kls@tvdr.de>
+# This file is distributed under the same license as the VDR package.
+# Alberto Carraro <bertocar@tin.it>, 2001
+# Antonio Ospite <ospite@studenti.unina.it>, 2003
+# Sean Carlos <seanc@libero.it>, 2005
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: VDR 1.7.27\n"
+"Report-Msgid-Bugs-To: <dev@erichseifert.de>\n"
+"POT-Creation-Date: 2012-10-30 13:00+0200\n"
+"PO-Revision-Date: 2012-10-30 13:00+0200\n"
+"Last-Translator: Sean Carlos <seanc@libero.it>\n"
+"Language-Team: <vdr@linuxtv.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "A Simple Clock"
+msgstr ""
+
+msgid "Clock"
+msgstr "Orologio"
+
+msgid "Transparent"
+msgstr "Trasparente"
+
+msgid "White"
+msgstr "Bianco"
+
+msgid "Black"
+msgstr "Nero"
+
+msgid "Red"
+msgstr "Rosso"
+
+msgid "Green"
+msgstr "Verde"
+
+msgid "Yellow"
+msgstr "Giallo"
+
+msgid "Blue"
+msgstr "Blu"
+
+msgid "Digital"
+msgstr "Digitale"
+
+msgid "Analog"
+msgstr "Analogico"
+
+msgid "Analog modern"
+msgstr ""
+
+msgid "MorphOS"
+msgstr ""
+
+msgid "TuxClock"
+msgstr ""
+
+msgid "Internet time"
+msgstr "Ora Internet"
+
+msgid "Tea clock"
+msgstr "Pausa tè"
+
+msgid "It's tea time"
+msgstr "E' l'ora del tè!"
+
+msgid "x Position"
+msgstr "Posizione x"
+
+msgid "y Position"
+msgstr "Posizione y"
+
+msgid "Type of the clock"
+msgstr "Tipo di orologio"
+
+msgid "Background color"
+msgstr "Colore sfondo"
+
+msgid "Foreground color"
+msgstr "Colore primo piano"
+
+msgid "Show Seconds"
+msgstr "Mostra secondi"
+
+msgid "FullScreen"
+msgstr "Schermo intero"
+
+msgid "Analog clock size"
+msgstr "Dimensione orologio analogico"
+
+msgid "Arrow color"
+msgstr "Colore freccia"
+
+msgid "Length of hour arrow [%]"
+msgstr "Lunghezza freccia ore [%]"
+
+msgid "Width of hour arrow [%]"
+msgstr "Larghezza freccia ore [%]"
+
+msgid "Length of min arrow [%]"
+msgstr "Lunghezza freccia minuti [%]"
+
+msgid "Width of min arrow [%]"
+msgstr "Larghezza freccia minuti [%]"
+
+msgid "Seconds arrow color"
+msgstr "Colore freccia secondi"
+
+msgid "Length of sec arrow [%]"
+msgstr "Lunghezza freccia secondi [%]"
+
+msgid "Width of sec arrow [%]"
+msgstr "Larghezza freccia secondi [%]"
+
+msgid "Time till tea"
+msgstr "Tempo restante per il tè"
+
+msgid "Show Countdown"
+msgstr "Mostra conto alla rovescia"
