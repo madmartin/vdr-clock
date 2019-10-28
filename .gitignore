@@ -1,0 +1,8 @@
+# gitignore(5) file
+*.[oa]
+*~
+.*.swp
+.gdb_history
+# generated files
+.dependencies
+libvdr-*
