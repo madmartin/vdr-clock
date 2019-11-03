@@ -3,6 +3,7 @@
  *
  * Clock Plugin for VDR. See http://vdr.aistleitner.info for download.
  * Copyright (C) 2007  Mario Aistleitner <vdr@aistleitner.info>
+ *           (C) 2019  Martin Dummer <martin.dummer@gmx.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +19,6 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * $Id$
  */
 
 #include <vdr/plugin.h>
@@ -26,6 +26,7 @@
 #include <vdr/remote.h>
 #include <vdr/i18n.h>
 #include <math.h>
+#include "clock.h"
 #include "enhancedbitmap.h"
 
 #include "images/clock.xpm"
@@ -88,29 +89,6 @@ const char      *ClockType[] = {trNOOP("Digital"),
 
 // --- cOSDClock -------------------------------------------------------------
 
-class cOSDClock : public cOsdObject,  public cThread {
-private:
-  cOsd *osd;
-  eKeys LastKey;
-  bool shutdown;
-  tColor ColorH, ColorM, ColorS, ColorForeGround, ColorBackGround;
-  int r;
-  void DrawArrow(double width, double len, tColor col, double ang, cEnhancedBitmap &img);
-  void DrawScale(int r, tColor col, cEnhancedBitmap &Analog);
-  void DrawModernSec(int r, int sec, tColor col, cEnhancedBitmap &Analog);
-  void DrawPoint(double x, double y, int r, tColor col, cEnhancedBitmap &Analog);
-  tColor getColor(int color);
-  static cBitmap bmClock;
-  static cBitmap bmTux;
-  static cBitmap bmTuxpart;
-protected:
-  virtual void Action(void);
-public:
-  cOSDClock(void);
-  virtual ~cOSDClock(void);
-  void Show(void) {Start(); }
-  eOSState ProcessKey(eKeys Key);
-};
 
 
 cBitmap cOSDClock::bmClock(clock_xpm);
@@ -145,6 +123,11 @@ cOSDClock::~cOSDClock()
      delete osd;
 
   cRemote::Put(LastKey);
+}
+
+void cOSDClock::Show(void)
+{
+    Start();
 }
 
 void cOSDClock::DrawArrow(double width, double len, tColor col, double ang, cEnhancedBitmap &img)
@@ -583,24 +566,6 @@ void cMenuSetupClock::Store(void)
 
 // --- cPluginClock ---------------------------------------------------
 
-class cPluginClock : public cPlugin {
-private:
-  // Add any member variables or functions you may need here.
-public:
-  cPluginClock(void);
-  virtual ~cPluginClock();
-  virtual const char *Version(void) { return VERSION; }
-  virtual const char *Description(void) { return tr(DESCRIPTION); }
-  virtual const char *CommandLineHelp(void);
-  virtual bool ProcessArgs(int argc, char *argv[]);
-  virtual bool Initialize(void);
-  virtual bool Start(void);
-  virtual void Housekeeping(void);
-  virtual const char *MainMenuEntry(void) { return tr(MAINMENUENTRY); }
-  virtual cOsdObject *MainMenuAction(void);
-  virtual cMenuSetupPage *SetupMenu(void);
-  virtual bool SetupParse(const char *Name, const char *Value);
-  };
 
 cPluginClock::cPluginClock(void)
 {
@@ -612,6 +577,16 @@ cPluginClock::cPluginClock(void)
 cPluginClock::~cPluginClock()
 {
   // Clean up after yourself!
+}
+
+const char *cPluginClock::Version(void)
+{
+    return VERSION;
+}
+
+const char *cPluginClock::Description(void)
+{
+    return tr(DESCRIPTION);
 }
 
 const char *cPluginClock::CommandLineHelp(void)
@@ -641,6 +616,11 @@ bool cPluginClock::Start(void)
 void cPluginClock::Housekeeping(void)
 {
   // Perform any cleanup or other regular tasks.
+}
+
+const char *cPluginClock::MainMenuEntry(void)
+{
+    return tr(MAINMENUENTRY);
 }
 
 cOsdObject *cPluginClock::MainMenuAction(void)
