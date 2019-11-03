@@ -26,23 +26,27 @@
 
 #include "enhancedbitmap.h"
 
-class cOSDClock : public cOsdObject,  public cThread {
+class cOSDClock : public cOsdObject, public cThread {
 private:
   cOsd *osd;
   eKeys LastKey;
   bool shutdown;
   tColor ColorH, ColorM, ColorS, ColorForeGround, ColorBackGround;
   int r;
-  void DrawArrow(double width, double len, tColor col, double ang, cEnhancedBitmap &img);
+  void DrawArrow(double width, double len, tColor col, double ang,
+                 cEnhancedBitmap &img);
   void DrawScale(int r, tColor col, cEnhancedBitmap &Analog);
   void DrawModernSec(int r, int sec, tColor col, cEnhancedBitmap &Analog);
-  void DrawPoint(double x, double y, int r, tColor col, cEnhancedBitmap &Analog);
+  void DrawPoint(double x, double y, int r, tColor col,
+                 cEnhancedBitmap &Analog);
   tColor getColor(int color);
   static cBitmap bmClock;
   static cBitmap bmTux;
   static cBitmap bmTuxpart;
+
 protected:
   virtual void Action(void);
+
 public:
   cOSDClock(void);
   virtual ~cOSDClock(void);
@@ -54,8 +58,8 @@ class cPluginClock : public cPlugin {
 private:
   // Add any member variables or functions you may need here.
 public:
-    static bool VDR_readyafterStartup;
-    static bool ClockIsVisible;
+  static bool VDR_readyafterStartup;
+  static bool ClockIsVisible;
   cPluginClock(void);
   virtual ~cPluginClock();
   virtual const char *Version(void);
