@@ -51,6 +51,10 @@ INCLUDES +=
 
 DEFINES += -DPLUGIN_NAME_I18N='"$(PLUGIN)"'
 
+ifdef DEBUG_CLOCK
+DEFINES += -DDEBUG_CLOCK
+endif
+
 ### The object files (add further files here):
 
 OBJS = $(PLUGIN).o enhancedbitmap.o

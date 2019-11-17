@@ -1,10 +1,12 @@
 This is a "plugin" for the Video Disk Recorder (VDR).
 
 Written by:                  Mario Aistleitner <vdr@aistleitner.info>
+                             Martin Dummer <martin.dummer@gmx.net>
 
 Project's homepage:          http://vdr.aistleitner.info
+                             https://github.com/madmartin/vdr-clock
 
-Latest version available at: http://vdr.aistleitner.info
+Latest version available at: https://github.com/madmartin/vdr-clock
 
 
 
@@ -44,4 +46,6 @@ your keymacros.conf
 User1 @clock
 
 The clock will be disabled as soon as you press any other button.
-Otherwise there would be a mess in the OSD. 
+Otherwise there would be a mess in the OSD.
+
+New feature: "Always show clock"

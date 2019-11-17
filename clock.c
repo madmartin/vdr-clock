@@ -25,6 +25,7 @@
 #include <vdr/font.h>
 #include <vdr/remote.h>
 #include <vdr/i18n.h>
+#include <vdr/status.h>
 #include <math.h>
 #include "clock.h"
 #include "enhancedbitmap.h"
@@ -33,7 +34,7 @@
 #include "images/tux.xpm"
 #include "images/tuxpart.xpm"
 
-static const char *VERSION = "1.0.0";
+static const char *VERSION = "1.0.2";
 static const char *DESCRIPTION = trNOOP("A Simple Clock");
 static const char *MAINMENUENTRY = trNOOP("Clock");
 
@@ -47,6 +48,8 @@ int Size = 2;
 int Alarm = false;
 int AlarmTime = -1;
 int ShowSec = true;
+int ShowAlways = false;
+int ShowAlwaysDelay = 20;
 int ShowAlarm = true;
 int FullScreen = false;
 int Type = 0;
@@ -77,6 +80,93 @@ const char *ClockType[] = {
     trNOOP("MorphOS"),   trNOOP("TuxClock"), trNOOP("Internet time"),
     trNOOP("Tea clock"),
 };
+
+// --- cStatusTest -------------------------------------------------------------
+
+void cStatusTest::OsdClear(void) {
+#ifdef DEBUG_CLOCK
+  dsyslog("clock: cStatusTest::OsdClear");
+#endif
+  cPluginClock::OtherOsdVisible = false;
+  cPluginClock::NoOsdStartTime = 0;
+}
+
+void cStatusTest::OsdTitle(const char *Title) {
+#ifdef DEBUG_CLOCK
+  dsyslog("clock: cStatusTest::OsdTitle '%s'", Title);
+#endif
+  cPluginClock::OtherOsdVisible = true;
+  cPluginClock::NoOsdStartTime = 0;
+}
+
+void cStatusTest::OsdStatusMessage(const char *Message) {
+#ifdef DEBUG_CLOCK
+  dsyslog("clock: cStatusTest::OsdStatusMessage '%s'", Message);
+#endif
+  cPluginClock::OtherOsdVisible = true;
+  cPluginClock::NoOsdStartTime = 0;
+}
+
+void cStatusTest::OsdHelpKeys(const char *Red, const char *Green,
+                              const char *Yellow, const char *Blue) {
+#ifdef DEBUG_CLOCK
+  dsyslog("clock: cStatusTest::OsdHelpKeys %s - %s - %s - %s", Red, Green,
+          Yellow, Blue);
+#endif
+  cPluginClock::OtherOsdVisible = true;
+  cPluginClock::NoOsdStartTime = 0;
+}
+
+void cStatusTest::OsdItem(const char *Text, int Index) {
+#ifdef DEBUG_CLOCK
+  dsyslog("clock: cStatusTest::OsdItem  %s %d", Text, Index);
+#endif
+  cPluginClock::OtherOsdVisible = true;
+  cPluginClock::NoOsdStartTime = 0;
+}
+
+void cStatusTest::OsdCurrentItem(const char *Text) {
+#ifdef DEBUG_CLOCK
+  dsyslog("clock: cStatusTest::OsdCurrentItem %s", Text);
+#endif
+  cPluginClock::OtherOsdVisible = true;
+  cPluginClock::NoOsdStartTime = 0;
+}
+
+void cStatusTest::OsdTextItem(const char *Text, bool Scroll) {
+#ifdef DEBUG_CLOCK
+  dsyslog("clock: cStatusTest::OsdTextItem %s %d", Text, Scroll);
+#endif
+  cPluginClock::OtherOsdVisible = true;
+  cPluginClock::NoOsdStartTime = 0;
+}
+
+void cStatusTest::OsdChannel(const char *Text) {
+#ifdef DEBUG_CLOCK
+  dsyslog("clock: cStatusTest::OsdChannel %s", Text);
+#endif
+  cPluginClock::OtherOsdVisible = true;
+  cPluginClock::NoOsdStartTime = 0;
+}
+
+void cStatusTest::OsdProgramme(time_t PresentTime, const char *PresentTitle,
+                               const char *PresentSubtitle,
+                               time_t FollowingTime, const char *FollowingTitle,
+                               const char *FollowingSubtitle) {
+  cPluginClock::OtherOsdVisible = true;
+  cPluginClock::NoOsdStartTime = 0;
+#ifdef DEBUG_CLOCK
+  char buffer[25];
+  struct tm tm_r;
+  dsyslog("clock: cStatusTest::OsdProgramme");
+  strftime(buffer, sizeof(buffer), "%R", localtime_r(&PresentTime, &tm_r));
+  dsyslog("%5s %s", buffer, PresentTitle);
+  dsyslog("%5s %s", "", PresentSubtitle);
+  strftime(buffer, sizeof(buffer), "%R", localtime_r(&FollowingTime, &tm_r));
+  dsyslog("%5s %s", buffer, FollowingTitle);
+  dsyslog("%5s %s", "", FollowingSubtitle);
+#endif
+}
 
 // --- cOSDClock -------------------------------------------------------------
 
@@ -110,9 +200,20 @@ cOSDClock::~cOSDClock() {
     delete osd;
 
   cRemote::Put(LastKey);
+  cPluginClock::ClockIsVisible = false;
+  cPluginClock::NoOsdStartTime = 0;
+#ifdef DEBUG_CLOCK
+  dsyslog("clock: cOSDClock::~cOSDClock() called, cOSDClock deleted");
+#endif
 }
 
-void cOSDClock::Show(void) { Start(); }
+void cOSDClock::Show(void) {
+  Start();
+  cPluginClock::ClockIsVisible = true;
+#ifdef DEBUG_CLOCK
+  dsyslog("clock: cOSDClock::Show called");
+#endif
+}
 
 void cOSDClock::DrawArrow(double width, double len, tColor col, double ang,
                           cEnhancedBitmap &img) {
@@ -218,6 +319,10 @@ void cOSDClock::Action(void) {
   Analog.SetColor(2, ColorH);
   Analog.SetColor(3, ColorM);
   Analog.SetColor(4, ColorS);
+
+#ifdef DEBUG_CLOCK
+  dsyslog("clock: enter function Action type %d", Type);
+#endif
 
   if (Type == 0 || Type > 4) {
     ClockHeight = font->Height() + 4;
@@ -348,6 +453,9 @@ void cOSDClock::Action(void) {
         TuxMap.Clean();
         Analog.Clean();
       } else if (Type == 0) {
+#ifdef DEBUG_CLOCK
+        dsyslog("clock: inside Action-Running type %d", Type);
+#endif
         if (ShowSec)
           sprintf(TimeString, " %02d:%02d:%02d ", Hour, Min, Sec);
         else
@@ -408,6 +516,9 @@ void cOSDClock::Action(void) {
 }
 
 eOSState cOSDClock::ProcessKey(eKeys Key) {
+#ifdef DEBUG_CLOCK
+  dsyslog("clock: inside ProcessKey %d", Key);
+#endif
   if (Key != kNone) {
     if (AlarmTime == -1)
       Alarm = false;
@@ -427,6 +538,8 @@ private:
   char Color[16][32];
   int newSize;
   int newShowSec;
+  int newShowAlways;
+  int newShowAlwaysDelay;
   int newShowAlarm;
   int newFullScreen;
   int newType;
@@ -458,6 +571,8 @@ cMenuSetupClock::cMenuSetupClock(void) {
   cSetup data;
   newSize = Size;
   newShowSec = ShowSec;
+  newShowAlways = ShowAlways;
+  newShowAlwaysDelay = ShowAlwaysDelay;
   newShowAlarm = ShowAlarm;
   newFullScreen = FullScreen;
   newType = Type;
@@ -501,6 +616,9 @@ cMenuSetupClock::cMenuSetupClock(void) {
   }
   if (newType == 0) {
     Add(new cMenuEditBoolItem(tr("Show Seconds"), &newShowSec));
+    Add(new cMenuEditBoolItem(tr("Always show clock"), &newShowAlways));
+    Add(new cMenuEditIntItem(tr("- Delay before clock is shown"),
+                             &newShowAlwaysDelay));
   } else if (newType == 1 || newType == 2) {
     Add(new cMenuEditBoolItem(tr("Show Seconds"), &newShowSec));
     Add(new cMenuEditBoolItem(tr("FullScreen"), &newFullScreen));
@@ -529,6 +647,8 @@ void cMenuSetupClock::Store(void) {
   SetupStore("XOffset", XOffset = newXOffset);
   SetupStore("YOffset", YOffset = newYOffset);
   SetupStore("ShowSec", ShowSec = newShowSec);
+  SetupStore("ShowAlways", ShowAlways = newShowAlways);
+  SetupStore("ShowAlwaysDelay", ShowAlwaysDelay = newShowAlwaysDelay);
   SetupStore("ShowAlarm", ShowAlarm = newShowAlarm);
   SetupStore("FullScreen", FullScreen = newFullScreen);
   SetupStore("Type", Type = newType);
@@ -550,14 +670,23 @@ void cMenuSetupClock::Store(void) {
 
 // --- cPluginClock ---------------------------------------------------
 
+bool cPluginClock::ClockIsVisible;
+bool cPluginClock::OtherOsdVisible;
+time_t cPluginClock::NoOsdStartTime;
+
 cPluginClock::cPluginClock(void) {
   // Initialize any member variables here.
   // DON'T DO ANYTHING ELSE THAT MAY HAVE SIDE EFFECTS, REQUIRE GLOBAL
   // VDR OBJECTS TO EXIST OR PRODUCE ANY OUTPUT!
+  statusTest = NULL;
+  OtherOsdVisible = false;
+  ClockIsVisible = false;
+  NoOsdStartTime = 0;
 }
 
 cPluginClock::~cPluginClock() {
   // Clean up after yourself!
+  delete statusTest;
 }
 
 const char *cPluginClock::Version(void) { return VERSION; }
@@ -581,11 +710,50 @@ bool cPluginClock::Initialize(void) {
 
 bool cPluginClock::Start(void) {
   // Start any background activities the plugin shall perform.
+  statusTest = new cStatusTest;
   return true;
 }
 
 void cPluginClock::Housekeeping(void) {
   // Perform any cleanup or other regular tasks.
+}
+
+void cPluginClock::MainThreadHook(void) {
+#ifdef DEBUG_CLOCK
+  dsyslog("clock: MainThreadHook  ShowAlways %d / ClockIsVisible %d / "
+          "OtherOsdVisible %d / NoOsdStartTime %ld",
+          ShowAlways, ClockIsVisible, OtherOsdVisible, NoOsdStartTime);
+#endif
+  if ((ClockIsVisible == false) && (OtherOsdVisible == false) &&
+      (ShowAlways == true)) {
+    // the Clock should be always visible
+    // now the clock is NOT visible and no other OSD is visible
+    if (NoOsdStartTime == 0) {
+      // keep current time to determine delay until clock is displayed
+#ifdef DEBUG_CLOCK
+      dsyslog("clock: MainThreadHook set NoOsdStartTime");
+#endif
+      NoOsdStartTime = time(NULL);
+    } else {
+      // delay time has started, check if we waited long enough
+      if ((time(NULL) - NoOsdStartTime) > ShowAlwaysDelay) {
+#ifdef DEBUG_CLOCK
+        dsyslog("clock: MainThreadHook NoOsdStartTime waited long enough");
+#endif
+        cRemote::CallPlugin("clock");
+        //    cRemote  static bool CallPlugin(const char *Plugin);
+        ///< Initiates calling the given plugin's main menu function.
+        ///< The Plugin parameter is the name of the plugin, and must be
+        ///< a static string. Returns true if the plugin call was successfully
+        ///< initiated (the actual call to the plugin's main menu function
+        ///< will take place some time later, during the next execution
+        ///< of VDR's main loop). If there is already a plugin call pending
+        ///< false will be returned and the caller should try again later.
+        NoOsdStartTime = 0;
+      }
+    }
+  }
+  // Note: this is called very often
 }
 
 const char *cPluginClock::MainMenuEntry(void) { return tr(MAINMENUENTRY); }
@@ -602,13 +770,16 @@ cMenuSetupPage *cPluginClock::SetupMenu(void) {
 
 bool cPluginClock::SetupParse(const char *Name, const char *Value) {
   // Parse your own setup parameters and store their values.
-
   if (!strcasecmp(Name, "XOffset"))
     XOffset = atoi(Value);
   else if (!strcasecmp(Name, "YOffset"))
     YOffset = atoi(Value);
   else if (!strcasecmp(Name, "ShowSec"))
     ShowSec = atoi(Value);
+  else if (!strcasecmp(Name, "ShowAlways"))
+    ShowAlways = atoi(Value);
+  else if (!strcasecmp(Name, "ShowAlwaysDelay"))
+    ShowAlwaysDelay = atoi(Value);
   else if (!strcasecmp(Name, "ShowAlarm"))
     ShowAlarm = atoi(Value);
   else if (!strcasecmp(Name, "FullScreen"))

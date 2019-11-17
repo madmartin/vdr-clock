@@ -1,0 +1,22 @@
+VDR Plugin 'clock' TODO list
+----------------------------
+
+ToDo: rausfinden wie info messages mit bereits angezeigtem OSD zusammenarbeiten
+  Setup-Menu: dynamische Änderungen der Einträge - siehe SVDRP Verbindung / nur
+  mit der Standardmaschine
+  oder satip / Deaktivierte Quellen
+
+  Setup-Menü durcheinander bei Art der Uhr "Tea clock" und "tux clock"
+  bei TuxClock ist Countown/Zeit bis fertig zu sehen, bei Tea clock fehlt es
+
+  Keine Übersetzungen bei
+
+const char *TimeColors[] = {
+    trNOOP("Transparent"), trNOOP("White"),  trNOOP("Black"), trNOOP("Red"),
+    trNOOP("Green"),       trNOOP("Yellow"), trNOOP("Blue"),
+};
+const char *ClockType[] = {
+    trNOOP("Digital"),   trNOOP("Analog"),   trNOOP("Analog modern"),
+    trNOOP("MorphOS"),   trNOOP("TuxClock"), trNOOP("Internet time"),
+    trNOOP("Tea clock"),
+};

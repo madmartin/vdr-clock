@@ -54,12 +54,33 @@ public:
   eOSState ProcessKey(eKeys Key);
 };
 
+class cStatusTest : public cStatus {
+protected:
+  virtual void OsdClear(void);
+  virtual void OsdTitle(const char *Title);
+  virtual void OsdStatusMessage(const char *Message);
+  virtual void OsdHelpKeys(const char *Red, const char *Green,
+                           const char *Yellow, const char *Blue);
+  virtual void OsdItem(const char *Text, int Index);
+  virtual void OsdCurrentItem(const char *Text);
+  virtual void OsdTextItem(const char *Text, bool Scroll);
+  virtual void OsdChannel(const char *Text);
+  virtual void OsdProgramme(time_t PresentTime, const char *PresentTitle,
+                            const char *PresentSubtitle, time_t FollowingTime,
+                            const char *FollowingTitle,
+                            const char *FollowingSubtitle);
+};
+
 class cPluginClock : public cPlugin {
 private:
   // Add any member variables or functions you may need here.
+  cStatusTest *statusTest;
+
 public:
   static bool VDR_readyafterStartup;
+  static bool OtherOsdVisible;
   static bool ClockIsVisible;
+  static time_t NoOsdStartTime;
   cPluginClock(void);
   virtual ~cPluginClock();
   virtual const char *Version(void);
@@ -69,6 +90,7 @@ public:
   virtual bool Initialize(void);
   virtual bool Start(void);
   virtual void Housekeeping(void);
+  virtual void MainThreadHook(void);
   virtual const char *MainMenuEntry(void);
   virtual cOsdObject *MainMenuAction(void);
   virtual cMenuSetupPage *SetupMenu(void);

@@ -1,6 +1,20 @@
 VDR Plugin 'clock' Revision History
 ----------------------------------
 
+Known issues:
+=============
+- when clock is displayed with "Always show clock = true" then no
+    messages are shown (e.g. send by "svdrpsend MESG hello")
+- osdteletext and other plugins which provide an OSD are disturbed from
+    the clock plugin
+
+
+2019-11-17: Version 1.0.2
+- refactor sources to separate header file
+- reformat sources with clang-format
+- add debug directive to makefile
+- add mode "Always show clock" for a (almost) permanent on-screen clock
+
 2019-10-28: Version 1.0.1
 - source code transferred to Github, original source is down
 - Converted to gettext
