@@ -6,3 +6,4 @@
 # generated files
 .dependencies
 libvdr-*
+*.tgz
